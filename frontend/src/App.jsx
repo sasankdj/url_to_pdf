@@ -10,7 +10,7 @@ function App() {
 
   const handleConvert = async () => {
     if (!url) {
-      alert("Please enter a URL");
+      alert("Enter a URL");
       return;
     }
 
@@ -33,7 +33,6 @@ function App() {
 
     } catch (err) {
       alert("Error generating PDF");
-      console.error(err);
     } finally {
       setLoading(false);
     }
@@ -42,9 +41,8 @@ function App() {
   return (
     <div style={styles.container}>
       <div style={styles.card}>
-        <h1 style={styles.title}>🌐 HTML → PDF Converter</h1>
+        <h1 style={styles.title}>✨ HTML → PDF</h1>
 
-        {/* URL Input */}
         <input
           type="text"
           placeholder="Enter website URL..."
@@ -53,16 +51,14 @@ function App() {
           style={styles.input}
         />
 
-        {/* File Name */}
         <input
           type="text"
-          placeholder="Enter PDF name (optional)"
+          placeholder="PDF file name (optional)"
           value={fileName}
           onChange={(e) => setFileName(e.target.value)}
           style={styles.input}
         />
 
-        {/* Toggles */}
         <div style={styles.toggleBox}>
           <label style={styles.label}>
             <input
@@ -70,7 +66,7 @@ function App() {
               checked={mobileView}
               onChange={() => setMobileView(!mobileView)}
             />
-            📱 Mobile View
+            📱 Mobile
           </label>
 
           <label style={styles.label}>
@@ -79,22 +75,18 @@ function App() {
               checked={imageMode}
               onChange={() => setImageMode(!imageMode)}
             />
-            🖼️ HD Image Mode
+            🖼️ HD Mode
           </label>
         </div>
 
-        {/* Button */}
         <button onClick={handleConvert} style={styles.button}>
           Convert to PDF
         </button>
 
-        {/* Loader */}
         {loading && (
           <div style={styles.loaderWrapper}>
             <div style={styles.spinner}></div>
-            <p style={{ marginTop: "10px" }}>
-              Generating high-quality PDF...
-            </p>
+            <p>Processing...</p>
           </div>
         )}
       </div>
@@ -104,61 +96,78 @@ function App() {
 
 export default App;
 
-/* 🎨 Styles */
+/* 🎨 STYLES */
 const styles = {
   container: {
     minHeight: "100vh",
-    background: "linear-gradient(135deg, #4facfe, #00f2fe)",
+    background:
+      "linear-gradient(135deg, #0f172a, #020617)",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    padding: "20px"
+    fontFamily: "sans-serif"
   },
+
   card: {
-    width: "100%",
-    maxWidth: "420px",
-    background: "#fff",
-    padding: "25px",
-    borderRadius: "15px",
-    boxShadow: "0 15px 30px rgba(0,0,0,0.2)",
-    textAlign: "center"
+    backdropFilter: "blur(20px)",
+    background: "rgba(255,255,255,0.05)",
+    border: "1px solid rgba(255,255,255,0.1)",
+    padding: "30px",
+    borderRadius: "16px",
+    width: "90%",
+    maxWidth: "400px",
+    boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
+    textAlign: "center",
+    color: "#fff"
   },
+
   title: {
-    marginBottom: "20px"
+    marginBottom: "20px",
+    fontWeight: "600"
   },
+
   input: {
     width: "100%",
     padding: "12px",
     marginBottom: "12px",
     borderRadius: "8px",
-    border: "1px solid #ccc"
+    border: "none",
+    outline: "none",
+    background: "rgba(255,255,255,0.1)",
+    color: "#fff"
   },
+
   toggleBox: {
     display: "flex",
     justifyContent: "space-between",
     marginBottom: "15px"
   },
+
   label: {
     fontSize: "14px"
   },
+
   button: {
     width: "100%",
     padding: "12px",
-    background: "#4facfe",
-    color: "#fff",
+    borderRadius: "10px",
     border: "none",
-    borderRadius: "8px",
+    background: "linear-gradient(135deg, #3b82f6, #9333ea)",
+    color: "#fff",
     fontWeight: "bold",
-    cursor: "pointer"
+    cursor: "pointer",
+    transition: "0.3s"
   },
+
   loaderWrapper: {
     marginTop: "20px"
   },
+
   spinner: {
-    width: "45px",
-    height: "45px",
-    border: "5px solid #ddd",
-    borderTop: "5px solid #4facfe",
+    width: "40px",
+    height: "40px",
+    border: "4px solid rgba(255,255,255,0.2)",
+    borderTop: "4px solid #3b82f6",
     borderRadius: "50%",
     animation: "spin 1s linear infinite",
     margin: "0 auto"
