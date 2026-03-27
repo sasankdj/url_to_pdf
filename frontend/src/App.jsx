@@ -18,7 +18,7 @@ function App() {
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:5000/api/pdf/generate",
+        "https://urltopdf-kicd.onrender.com/api/pdf/generate",
         { url, mobileView, fileName, imageMode },
         { responseType: "blob" }
       );
