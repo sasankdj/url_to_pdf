@@ -15,10 +15,14 @@ router.post("/generate", async (req, res) => {
   let browser;
 
   try {
-    browser = await puppeteer.launch({
-      headless: true,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"]
-    });
+  browser = await puppeteer.launch({
+  headless: true,
+  args: [
+    "--no-sandbox",
+    "--disable-setuid-sandbox",
+    "--disable-dev-shm-usage"
+  ]
+});
 
     const page = await browser.newPage();
 
@@ -37,10 +41,13 @@ router.post("/generate", async (req, res) => {
     );
 
     // 🌐 Load page
-    await page.goto(url, {
-      waitUntil: "networkidle2",
-      timeout: 0
-    });
+  await page.goto(url, {
+  waitUntil: "domcontentloaded",
+  timeout: 0
+});
+
+// wait for full rendering
+await new Promise(resolve => setTimeout(resolve, 3000));
 
     // Wait for images
     await page.waitForSelector("img", { timeout: 10000 }).catch(() => {});
